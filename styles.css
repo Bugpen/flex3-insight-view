@@ -1,0 +1,400 @@
+ :root {
+        --primary-color: #2c3e50;     --secondary-color: #3498db;     --accent-color: #f39c12;     --success-color: #27ae60;     --error-color: #e74c3c;     
+        --background-color: #f0f2f5;     --card-background: #ffffff;     --input-background: #f8f9fa;     
+        --text-color: #333;     --text-secondary: #666666;     
+        --border-color: #ddd;     
+        --sidebar-width-desktop: 280px;
+    --sidebar-width-collapsed: 76px;
+    --header-height-desktop: 64px;
+    --header-height-mobile: 50px;
+    --queen-height: 60px;
+    --gap: 10px;
+    --prince-height: 360px;     --player-details-height: 120px; }
+
+.hidden {
+    display: none !important;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--background-color);
+    overflow-x: hidden;
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;     background-color: var(--card-background);
+}
+
+.sidebar-wrapper {
+    width: var(--sidebar-width-desktop);
+    background-color: var(--secondary-color);
+    color: white;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    transition: left 0.4s ease-in-out, width 0.3s ease;
+}
+
+.sidebar-header {
+    text-align: center;
+    padding: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-header h1 {
+    font-size: 1.4em;
+    margin: 0;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 8px;
+}
+
+.sidebar-nav a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 0 8px 8px 0;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 1.1em;
+}
+
+.sidebar-nav a i {
+    margin-right: 12px;
+    width: 22px;
+    text-align: center;
+    flex: 0 0 22px;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+}
+
+.main-content-wrapper {
+    margin-left: var(--sidebar-width-desktop);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - var(--header-height-desktop));
+    overflow-x: hidden;
+    overflow-y: auto;     background-color: var(--background-color);
+    transition: margin-left 0.4s ease-in-out;
+}
+
+body.sidebar-collapsed .sidebar-wrapper {
+    width: var(--sidebar-width-collapsed);
+}
+
+body.sidebar-collapsed .sidebar-header h1 {
+    font-size: 0;
+}
+
+body.sidebar-collapsed .sidebar-header h1::first-letter {
+    font-size: 0;
+}
+
+body.sidebar-collapsed .sidebar-nav a {
+    justify-content: center;
+    padding: 14px 0;
+    border-radius: 0;
+}
+
+body.sidebar-collapsed .sidebar-nav a i {
+    margin-right: 0;
+}
+
+body.sidebar-collapsed .sidebar-nav a {
+    font-size: 0;
+}
+
+body.sidebar-collapsed .sidebar-nav a i {
+    font-size: 18px;
+}
+
+body.sidebar-collapsed .main-content-wrapper {
+    margin-left: var(--sidebar-width-collapsed);
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 14px;
+    background: #fff;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 4000;
+    height: 52px;
+    box-sizing: border-box;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.topbar-title {
+    display: flex;
+    align-items: center;
+    min-width: 120px;
+    max-width: 220px;
+    height: 42px;
+    padding: 0 10px;
+    border-right: 1px solid var(--border-color);
+    color: var(--secondary-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.topbar-title strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-toggle,
+.topbar-close-btn,
+.settings-gear {
+    display: inline-flex;
+    flex: 0 0 42px;
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    background: none;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    padding: 0;
+    border-radius: 12px;
+    transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+    color: var(--text-color);
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+}
+
+.menu-toggle:hover,
+.topbar-close-btn:hover,
+.settings-gear:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.menu-toggle i,
+.topbar-close-btn i,
+.settings-gear i {
+    font-size: 18px;
+}
+
+.topbar-close-btn {
+    flex-basis: 0;
+    width: 0;
+    min-width: 0;
+    border-width: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.92);
+    overflow: hidden;
+}
+
+.topbar-close-btn.visible {
+    flex-basis: 42px;
+    width: 42px;
+    min-width: 42px;
+    border-width: 1px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
+
+.search-bar {
+    flex: 0 1 clamp(92px, 9vw, 156px);
+    width: clamp(92px, 9vw, 156px);
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    overflow: hidden;
+    background-color: var(--card-background);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar input {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 9px 10px 9px 12px;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    background: transparent;
+}
+
+.search-bar button {
+    flex: 0 0 34px;
+    width: 34px;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: var(--text-color);
+}
+
+.date-filter {
+    position: relative;
+    flex: 0 1 clamp(122px, 13vw, 166px);
+    width: clamp(122px, 13vw, 166px);
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+}
+
+.date-filter input[type="date"] {
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    padding: 0 34px 0 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: #fff;
+    font-size: 0.86em;
+}
+
+.date-filter #clearDateFilter {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: none;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.06);
+    padding: 0;
+}
+
+.settings-gear-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.autoplay-toggle {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--secondary-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.google-signin-btn {
+    width: 100%;
+    padding: 12px 16px;
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.google-signin-btn:hover {
+    background: #f5f5f5;
+    border-color: #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.google-signin-btn:active {
+    background: #eee;
+    transform: translateY(1px);
+}
+
+.autoplay-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.autoplay-btn:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+.autoplay-btn.active {
+    background: #f39c12;
+    color: #000;
+    box-shadow: 0 0 8px rgba(243, 156, 18, 0.3);
+}
+
+.autoplay-btn i {
+    font-size: 1.1em;
+}
+
+.playlist-item.playing {
+    background: rgba(243, 156, 18, 0.1);
+    border-left: 3px solid #f39c12;
+}
+
+.menu-toggle:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.menu-toggle i {
+    font-size: 28px;
+}
